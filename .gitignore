@@ -1,0 +1,3 @@
+logs/*
+!logs/.gitempty
+config.php

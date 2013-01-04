@@ -3,9 +3,9 @@ Class Db {
 	protected $connected = FALSE;
 	protected $core;
 
-	function __construct()
+	function __construct($connect = TRUE)
 	{
-		if ($this->connected === FALSE)
+		if ($connect === TRUE && $this->connected === FALSE)
 		{
 			$this->connect(config('db_username'), config('db_password'), config('db_database'), config('db_host'));
 		}
@@ -16,22 +16,20 @@ Class Db {
 		$link = mysql_connect($host, $username, $password) OR $this->error();
 		mysql_set_charset('utf8', $link);
 		mysql_select_db($database) OR $this->error();
-		mysql_query("SET NAMES ‘utf8′");
+		$this->simple_query("SET NAMES 'utf8'");
 
 		$this->connected = TRUE;
 	}
 
 	public function query($query, $model = FALSE, $only_first_row = FALSE)
 	{
-		require($model .'.php');
+		if ($model) require($model .'.php');
 		$data = array();
 
-		//foreach (explode('x50$', base64_decode($query)) AS $r) !!!
-		//{
 		$result = mysql_query($query) or $this->error();
 		while($row = mysql_fetch_object($result))
 		{
-			if ($model !== FALSE)
+			if ($model)
 			{
 				$new_row = new $model;
 				foreach ($row AS $a=>$b)
@@ -49,9 +47,13 @@ Class Db {
 
 			$data[] = $row;
 		}
-		//}
 
 		return (count($data) === 0 ? FALSE : $data);
+	}
+
+	function simple_query($query)
+	{
+		return mysql_query($query) or $this->error();
 	}
 
 	protected function error($message = FALSE)

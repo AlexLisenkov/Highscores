@@ -3,7 +3,8 @@ Class User_model {
 	public $id;
 	public $username;
 	public $password; // You may want to use this in the future for web login
-	public $is_member;
+	public $is_member; // Varibles like this one could be usefull in the future
+	// Feel free to add more variables (you will need to add them in the db too)
 
 	public $overall_xp;
 	public $attack_xp;
@@ -98,6 +99,19 @@ Class User_model {
 
 	public function rank($name)
 	{
-		return '#';
+		$name = strtolower($name);
+		$skill = $name . '_xp';
+
+		// Is the skill set?
+		if (isset($this->$skill) === FALSE) return FALSE;
+
+		if (isset($this->db) === FALSE) $this->db = new Db;
+
+		$this->db->simple_query('SET @rownum := 0;');
+
+		$subquery = 'SELECT @rownum := @rownum + 1 AS rank, ' . $skill . ', id FROM ' . config('db_table') . ' ORDER BY ' . $skill . ' DESC';
+		$data = $this->db->query('SELECT rank, ' . $skill . ' FROM (' . $subquery . ') as result WHERE id=' . $this->id, FALSE, TRUE);
+
+		return $data->rank;
 	}
 }

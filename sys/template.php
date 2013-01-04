@@ -1,6 +1,9 @@
 <?php
 Class Template {
-	
+
+	/**
+	 * Build a single file
+	 */
 	public function build($filename, $params = array())
 	{
 		$file = 'template/'. config('site.active_template') .'/' . $filename . '.php';
@@ -11,10 +14,11 @@ Class Template {
 			extract($params);
 			require($file);
 		}
-
-		
 	}
 
+	/**
+	 * Load the full view
+	 */
 	public function load($filename, $params = array())
 	{
 		$template = new Template;
@@ -28,5 +32,4 @@ Class Template {
 
 		require('template/'. config('site.active_template') .'/main.php');
 	}
-
 }

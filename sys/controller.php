@@ -45,6 +45,8 @@ Class Controller extends Template {
 	 */
 	public function user($username = '')
 	{
+		$username = urldecode($username);
+
 		$data = $this->db->query('SELECT * FROM `' . config('db_table') . '` WHERE `username`="' . $username .'" LIMIT 1', $this->model_name, TRUE);
 
 		$this->load('user', array(
@@ -59,8 +61,8 @@ Class Controller extends Template {
 	 */
 	public function view()
 	{
-		$page = (isset($_POST['username']) ? 'user/' . $_POST['username'] : '');
-		$page = preg_replace('/[^a-z_\-0-9\/\s]/i', '', $page);
+		$page = (isset($_POST['username']) ? 'user/' . urlencode($_POST['username']) : '');
+		$page = preg_replace('/[^a-z_\-0-9\/\s+]/i', '', $page);
 		header('Location: ' . base_url($page));
 	}
 

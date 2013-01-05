@@ -48,7 +48,7 @@ Class Db {
 			$data[] = $row;
 		}
 
-		return (count($data) === 0 ? FALSE : $data);
+		return (count($data) === 0 ? array() : $data);
 	}
 
 	function simple_query($query)

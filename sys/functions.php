@@ -54,10 +54,15 @@ function path($i)
 // Sites base URL
 function base_url($url = FALSE)
 {
+	return 'http://'. $_SERVER['HTTP_HOST'] . path_directory() .'/' . $url;
+}
+
+// Get active directory
+function path_directory()
+{
 	$dir = explode('/', $_SERVER['PHP_SELF']);
 	unset($dir[count($dir)-1]);
-	$directory = implode('/', $dir);
-	return 'http://'. $_SERVER['HTTP_HOST'] . $directory .'/' . $url;
+	return implode('/', $dir);
 }
 
 // Anchor building

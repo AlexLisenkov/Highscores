@@ -5,6 +5,11 @@ Class Core {
 
 	function __construct()
 	{
+		if (file_exists('config.php') === FALSE)
+		{
+			die('Please install the system. Go to the `install.php` file in your browser');
+		}
+
 		// Load function file
 		require('sys/functions.php');
 

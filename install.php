@@ -44,7 +44,7 @@ Class Installation {
 		echo '<hr>';
 		echo '<label>Site name: <input type="text" name="site_name" value="Highscores" /></label>';
 		echo '<label>Site description: <input type="text" name="site_description" value="" /></label>';
-		echo '<label>Site homepage: <input type="text" name="site_homepage" value="' . $_SERVER['HTTP_HOST'] . '" /></label>';
+		echo '<label>Site homepage: <input type="text" name="site_homepage" value="http://www.' . $_SERVER['HTTP_HOST'] . '/" /></label>';
 		echo '<input type="submit" value="               Go!               " />';
 		echo '</form>';
 	}
@@ -111,6 +111,19 @@ Class Installation {
 		fwrite($fh, "\$config['site.homepage'] = '" . $_POST['site_homepage'] . "';\n");
 		fwrite($fh, "\$config['site.active_template'] = 'bootstrap';\n");
 		fclose($fh);
+
+		// Create .htaccess file
+		if (file_exists('.htaccess') === FALSE)
+		{
+			$fh = fopen('.htaccess', 'w') or die("Couldn't create .htaccess file");
+			fwrite($fh, "Options +FollowSymLinks -Indexes\n");
+			fwrite($fh, "RewriteEngine on\n");
+			fwrite($fh, "RewriteBase " . path_directory() . "/\n");
+			fwrite($fh, "RewriteCond %{REQUEST_FILENAME} !-f\n");
+			fwrite($fh, "RewriteCond %{REQUEST_FILENAME} !-d\n");
+			fwrite($fh, "RewriteRule ^(.*)$ index.php?path=$1 [L]\n");
+			fclose($fh);
+		}
 
 		// Tell the global server that we intalled this
 		// This is purely for the statistics

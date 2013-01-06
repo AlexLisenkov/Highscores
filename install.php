@@ -35,7 +35,7 @@ Class Installation {
 	function step_one()
 	{
 		echo '<style type="text/css">label {display:block}</style>';
-		echo '<form method="post" action="' . base_url('install.php?step=2') . '">';
+		echo '<form method="post" action="' . base_url() . 'install.php?step=2">';
 		echo '<label>Database host: <input type="text" name="db_host" value="localhost" /></label>';
 		echo '<label>Database username: <input type="text" name="db_username" value="root" /></label>';
 		echo '<label>Database password: <input type="text" name="db_password" value="" /></label>';
@@ -45,6 +45,7 @@ Class Installation {
 		echo '<label>Site name: <input type="text" name="site_name" value="Highscores" /></label>';
 		echo '<label>Site description: <input type="text" name="site_description" value="" /></label>';
 		echo '<label>Site homepage: <input type="text" name="site_homepage" value="http://www.' . $_SERVER['HTTP_HOST'] . '/" /></label>';
+		echo '<label>use .htaccess (mod rewrite): <select name="use_htaccess"><option value="0">No</option><option value="1">Yes</option></select></label>';
 		echo '<input type="submit" value="               Go!               " />';
 		echo '</form>';
 	}
@@ -110,10 +111,11 @@ Class Installation {
 		fwrite($fh, "\$config['site.description'] = '" . $_POST['site_description'] . "';\n");
 		fwrite($fh, "\$config['site.homepage'] = '" . $_POST['site_homepage'] . "';\n");
 		fwrite($fh, "\$config['site.active_template'] = 'bootstrap';\n");
+		fwrite($fh, "\$config['use_htaccess'] = " . ($_POST['use_htaccess'] == '1' ? 'TRUE' : 'FALSE') . ";\n");
 		fclose($fh);
 
 		// Create .htaccess file
-		if (file_exists('.htaccess') === FALSE)
+		if ($_POST['use_htaccess'] == '1' && file_exists('.htaccess') === FALSE)
 		{
 			$fh = fopen('.htaccess', 'w') or die("Couldn't create .htaccess file");
 			fwrite($fh, "Options +FollowSymLinks -Indexes\n");

@@ -54,7 +54,7 @@ function path($i)
 // Sites base URL
 function base_url($url = FALSE)
 {
-	return 'http://'. $_SERVER['HTTP_HOST'] . path_directory() .'/' . $url;
+	return 'http://'. $_SERVER['HTTP_HOST'] . path_directory() .'/'. ($url === FALSE || config('use_htaccess') ? '' : '?path=') . $url;
 }
 
 // Get active directory
@@ -68,7 +68,8 @@ function path_directory()
 // Anchor building
 function anchor($url, $name, $attrs = FALSE)
 {
-	$full_url = (filter_var($url, FILTER_VALIDATE_URL) === FALSE ? base_url() : '') . $url;
+	$base = base_url() . (config('use_htaccess') ? '' : '?path=');
+	$full_url = (filter_var($url, FILTER_VALIDATE_URL) === FALSE ? $base : '') . $url;
 	return '<a href="'. $full_url .'"' . ($attrs ? ' ' . $attrs : '') . '>' . $name . '</a>';
 }
 

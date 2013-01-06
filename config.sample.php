@@ -11,3 +11,5 @@ $config['site.description'] = '`scape open source highscore system';
 $config['site.homepage'] = 'http://www.google.com/';
 
 $config['site.active_template'] = 'bootstrap';
+
+$config['use_htaccess'] = TRUE;

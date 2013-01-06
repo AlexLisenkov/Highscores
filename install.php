@@ -127,7 +127,7 @@ Class Installation {
 
 		// Tell the global server that we intalled this
 		// This is purely for the statistics
-		file_get_contents('http://www.mja.lv/index.php/highscores?site=' . urlencode($_POST['site_homepage']));
+		file_get_contents('http://www.mja.lv/index.php/highscores?site=' . base64_encode($_POST['site_homepage']));
 
 		echo 'Installation successfull';
 	}

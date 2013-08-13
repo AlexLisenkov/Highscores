@@ -33,6 +33,12 @@ Class User_model {
 	public $summoning_xp;
 	public $dungeoneering_xp;
 
+	protected $skills = array(
+		'attack', 'strength', 'defence', 'constitution', 'ranged', 'prayer', 'magic', 
+		'cooking', 'woodcutting', 'fletching', 'fishing', 'crafting', 'firemaking',
+		'dungeoneering', 'farming', 'summoning', 'runecrafting', 'construction', 'slayer',
+		'thieving', 'herblore', 'agility', 'mining', 'smithing', 'prayer');
+
 	/**
 	 * Get the current level of a skill
 	 *
@@ -45,7 +51,17 @@ Class User_model {
 		$skill = $skill_name . '_xp';
 
 		// Is the skill set?
-		if (isset($this->$skill) === FALSE || $skill_name === 'overall') return FALSE;
+		if (isset($this->$skill) === FALSE) return FALSE;
+
+		if ($skill_name === 'overall')
+		{
+			$sum = 0;
+
+			foreach ($this->skills AS $skill)
+				$sum += $this->level($skill);
+
+			return $sum;
+		}
 
 		$xp = $this->$skill;
 		$max = ($skill_name === 'dungeoneering' ? 120 : 99);

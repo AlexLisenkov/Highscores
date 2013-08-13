@@ -53,7 +53,8 @@ Class Db {
 
 	function simple_query($query)
 	{
-		return mysql_query($query) or $this->error();
+		$result = mysql_query($query) or $this->error();
+		return $result;
 	}
 
 	protected function error($message = FALSE)

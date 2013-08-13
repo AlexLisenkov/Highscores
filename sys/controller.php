@@ -28,12 +28,19 @@ Class Controller extends Template {
 		$page = ((int) $page) - 1;
 		$page = ($page < 0 ? 0 : $page);
 
-		$data = $this->db->query('SELECT * FROM `' . config('db_table') . '` ORDER BY `'. $this->skill_name($skill) .'_xp` DESC LIMIT ' . ($page * $this->per_page) . ', ' . $this->per_page, $this->model_name);
+		if ($skill === 'overall')
+			$data = $this->overall_hs($page);
+		else
+			$data = $this->db->query('SELECT * FROM `' . config('db_table') . '` ORDER BY `'. $this->skill_name($skill) .'_xp` DESC LIMIT ' . ($page * $this->per_page) . ', ' . $this->per_page, $this->model_name);
+
+		$total = mysql_num_rows($this->db->simple_query('SELECT * FROM `' . config('db_table') . '`'));
 
 		$this->load('index', array(
 			'data' => $data,
 			'plus' => $page * $this->per_page,
-			'skill' => $this->skill_name($skill)
+			'skill' => $this->skill_name($skill),
+			'items_per_page' => $this->per_page,
+			'total_items' => $total,
 			));
 	}
 
@@ -84,5 +91,34 @@ Class Controller extends Template {
 
 		// Default
 		return 'overall';
+	}
+
+	/**
+	 * Get overall highscores
+	 * @param  int $page
+	 * @return object
+	 */
+	protected function overall_hs($page)
+	{
+		$all = $this->db->query('SELECT * FROM `' . config('db_table') . '`', $this->model_name);
+
+		$data = array();
+		$return = array();
+		$i = 0;
+
+		// Set total level as the key
+		foreach ($all AS $row)
+			$data[ $row->level('overall') . '_' . $row->id ] = $row;
+
+		sort($data);
+
+		// Calc max index
+		$max = ($page * $this->per_page) + $this->per_page;
+		$max = ($max >= count($data) ? count($data) : $max);
+
+		for ($i = $page * $this->per_page; $i < $max; $i++)
+			$return[] = $data[$i];
+
+		return $return;
 	}
 }

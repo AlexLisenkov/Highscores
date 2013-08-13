@@ -33,12 +33,6 @@ Class User_model {
 	public $summoning_xp;
 	public $dungeoneering_xp;
 
-	protected $skills = array(
-		'attack', 'strength', 'defence', 'constitution', 'ranged', 'prayer', 'magic', 
-		'cooking', 'woodcutting', 'fletching', 'fishing', 'crafting', 'firemaking',
-		'dungeoneering', 'farming', 'summoning', 'runecrafting', 'construction', 'slayer',
-		'thieving', 'herblore', 'agility', 'mining', 'smithing', 'prayer');
-
 	/**
 	 * Get the current level of a skill
 	 *
@@ -57,8 +51,12 @@ Class User_model {
 		{
 			$sum = 0;
 
-			foreach ($this->skills AS $skill)
+			foreach (valid_skills() AS $skill)
+			{
+				if ($skill === 'overall') continue;
+
 				$sum += $this->level($skill);
+			}
 
 			return $sum;
 		}

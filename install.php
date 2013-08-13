@@ -1,10 +1,7 @@
 <?php
 Class Installation {
-	/*
-		1. Kontaktejas ar serveri un pazino, par instalaciju
-		2. Lietotajam izveleeites DB, username, password
-		3.
-	**/
+
+	protected $version = 1.2;
 
 	function __construct()
 	{
@@ -44,7 +41,7 @@ Class Installation {
 		echo '<hr>';
 		echo '<label>Site name: <input type="text" name="site_name" value="Highscores" /></label>';
 		echo '<label>Site description: <input type="text" name="site_description" value="" /></label>';
-		echo '<label>Site homepage: <input type="text" name="site_homepage" value="http://www.' . $_SERVER['HTTP_HOST'] . '/" /></label>';
+		echo '<label>Site homepage: <input type="text" name="site_homepage" value="'. $this->full_url() .'" /></label>';
 		echo '<label>use .htaccess (mod rewrite): <select name="use_htaccess"><option value="0">No</option><option value="1">Yes</option></select></label>';
 		echo '<input type="submit" value="               Go!               " />';
 		echo '</form>';
@@ -129,9 +126,18 @@ Class Installation {
 
 		// Tell the global server that we intalled this
 		// This is purely for the statistics
-		file_get_contents('http://www.mja.lv/index.php/highscores?site=' . base64_encode($_POST['site_homepage']));
+		file_get_contents('http://www.mja.lv/index.php/highscores?site=' . base64_encode($_POST['site_homepage']) . '&installation=' . base64_encode($this->full_url()) . '&version=' . urlencode($this->version));
 
 		echo 'Installation successfull';
+	}
+
+	function full_url()
+	{
+		$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+		$sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
+		$protocol = substr($sp, 0, strpos($sp, "/")) . $s;
+		$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+		return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
 	}
 }
 

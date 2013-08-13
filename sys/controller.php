@@ -110,7 +110,8 @@ Class Controller extends Template {
 		foreach ($all AS $row)
 			$data[ $row->level('overall') . '_' . $row->id ] = $row;
 
-		sort($data);
+		krsort($data);
+		$data = array_values($data);
 
 		// Calc max index
 		$max = ($page * $this->per_page) + $this->per_page;

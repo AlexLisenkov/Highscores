@@ -108,7 +108,7 @@ Class Controller extends Template {
 
 		// Set total level as the key
 		foreach ($all AS $row)
-			$data[ $row->level('overall') . '_' . $row->id ] = $row;
+			$data[ $row->level('overall') . '.' . $row->id ] = $row;
 
 		krsort($data);
 		$data = array_values($data);

@@ -17,4 +17,7 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- This copyright notice MUST remain intact (refer to the license) -->
+	<p>&copy; <a href="http://www.mja.lv/" title="Made by Matiss Janis Aboltins">MJĀ</a></p>
 </body>

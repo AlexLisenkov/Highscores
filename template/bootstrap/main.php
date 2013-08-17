@@ -16,8 +16,9 @@
 				<?php $template->build('right_sidebar'); ?>
 			</div>
 		</div>
-	</div>
 
-	<!-- This copyright notice MUST remain intact (refer to the license) -->
-	<p>&copy; <a href="http://www.mja.lv/" title="Made by Matiss Janis Aboltins">MJĀ</a></p>
+
+		<!-- Do the right thing. Please support the author by leaving this intact (refer to license). -->
+		<p>&copy; <a href="http://www.mja.lv/" title="Made by Matiss Janis Aboltins">MJĀ</a></p>
+	</div>
 </body>

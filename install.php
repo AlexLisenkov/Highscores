@@ -1,7 +1,7 @@
 <?php
 Class Installation {
 
-	protected $version = 1.2;
+	protected $version = 1.3;
 
 	function __construct()
 	{

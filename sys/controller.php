@@ -41,6 +41,7 @@ Class Controller extends Template {
 			'skill' => $this->skill_name($skill),
 			'items_per_page' => $this->per_page,
 			'total_items' => $total,
+			'current_page' => $page+1,
 			));
 	}
 

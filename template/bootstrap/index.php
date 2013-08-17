@@ -21,10 +21,22 @@
 
 <!-- Pagination -->
 <?php if ($total_items > $items_per_page): ?>
+	<?php
+	// Calculate pagination offsets
+	$max = $current_page + 5;
+	$min = $current_page - 5;
+
+	if ($min <= 0)
+		$min = 1;
+
+	if ($max > ceil($total_items / $items_per_page))
+		$max = ceil($total_items / $items_per_page);
+	?>
+
 	<div class="pagination">
 		<ul>
-			<?php for ($page = 1; $page <= ceil($total_items / $items_per_page); $page++): ?>
-				<li><?php echo anchor('index/'. $skill .'/' . $page, $page); ?></li>
+			<?php for ($page = $min; $page <= $max; $page++): ?>
+				<li<?php if ($page === $current_page): ?> class="active"<?php endif; ?>><?php echo anchor('index/'. $skill .'/' . $page, $page); ?></li>
 			<?php endfor; ?>
 		</ul>
 	</div>

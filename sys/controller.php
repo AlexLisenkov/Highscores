@@ -74,6 +74,23 @@ Class Controller extends Template {
 	}
 
 	/**
+	 * Goto a certain page
+	 * @return void
+	 */
+	public function gotopage()
+	{
+		$num = (int) (isset($_POST['pagetogo']) ? $_POST['pagetogo'] : 0);
+		$skill = (isset($_POST['current_skill']) ? $_POST['current_skill'] : NULL);
+
+		if ($num <= 0)
+			$num = 1;
+
+		$page = 'index/' . $this->skill_name($skill) . '/' . $num;
+
+		header('Location: ' . base_url($page));
+	}
+
+	/**
 	 * Validate skills name and return the
 	 * proper DB row name.
 	 *

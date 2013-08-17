@@ -12,3 +12,13 @@
 		<button type="submit" class="btn btn-primary">Look-up</button>
 	</form>
 </div>
+
+<div class="well">
+	<form method="post" action="<?php echo base_url('gotopage'); ?>">
+		<label>Go to page</label>
+		<input type="text" placeholder="Page number..." name="pagetogo" />
+		<input type="hidden" name="current_skill" value="<?php echo path(1); ?>" />
+		
+		<button type="submit" class="btn btn-primary">Go</button>
+	</form>
+</div>

@@ -99,7 +99,7 @@ Class Controller extends Template {
 	{
 		$user = array();
 		$user[] =  urlencode($_POST['user'][0]);
-		$user[] =  $this->sqli->res($_POST['user'][1]);
+		$user[] =  urlencode($_POST['user'][1]);
 		$page = 'compare/' . $user[0] . '/' . $user[1];
 
 		header('Location: ' . base_url($page));

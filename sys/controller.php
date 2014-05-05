@@ -90,6 +90,36 @@ Class Controller extends Template {
 
 		header('Location: ' . base_url($page));
 	}
+	
+	/**
+	 * Redirect to compare page
+	 * @return array
+	 */
+	public function gocompare( )
+	{
+		$user = array();
+		$user[] =  urlencode($_POST['user'][0]);
+		$user[] =  $this->sqli->res($_POST['user'][1]);
+		$page = 'compare/' . $user[0] . '/' . $user[1];
+
+		header('Location: ' . base_url($page));
+		
+	}
+	/**
+	 * Compare two users
+	 * @param string $first_user, string $second_user
+	 * @return array
+	 */
+	public function compare( $first_user, $second_user )
+	{
+		$data = $this->db->query('SELECT * FROM `' . config('db_table') . '` WHERE `username` IN ("' . $first_user .'" , "'. $second_user .'") LIMIT 2', $this->model_name, FALSE);
+		
+		
+		
+		$this->load('compare', array(
+			'data' => $data
+		));
+	}
 
 	/**
 	 * Validate skills name and return the
@@ -140,4 +170,5 @@ Class Controller extends Template {
 
 		return $return;
 	}
+	
 }

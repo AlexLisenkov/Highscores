@@ -11,6 +11,7 @@ body {padding-top:20px}
 <!-- Le styles -->
 <link href="<?php echo base_url(); ?>template/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>template/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>template/bootstrap/css/main.css" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>

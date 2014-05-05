@@ -14,6 +14,15 @@
 </div>
 
 <div class="well">
+	<form method="post" action="<?php echo base_url('gocompare'); ?>">
+		<label>Compare users</label>
+		<input type="text" placeholder="John" name="user[]" />
+		<input type="text" placeholder="Peter" name="user[]" />
+		<button type="submit" class="btn btn-primary">Start</button>
+	</form>
+</div>
+
+<div class="well">
 	<form method="post" action="<?php echo base_url('gotopage'); ?>">
 		<label>Go to page</label>
 		<input type="text" placeholder="Page number..." name="pagetogo" />

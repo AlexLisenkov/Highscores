@@ -1,0 +1,18 @@
+.higher{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: 0 0;
+	width: 20px;
+	height: 25px;
+}
+.lower{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: -20px 0;
+	width: 20px;
+	height: 25px;
+}
+.even{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: -40px 0;
+	width: 20px;
+	height: 25px;
+}

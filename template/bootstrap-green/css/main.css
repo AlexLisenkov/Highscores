@@ -1,0 +1,41 @@
+/* Overwrite default bootstrap */
+a{
+	color: #11cc00;
+}
+a:hover{
+	color: #0ea300;
+}
+.nav-list > .active > a, .nav-list > .active > a:hover{
+	color: #fff;
+	background-color: #0ea300; 
+}
+.btn-primary{
+	background-color: #40cc33;
+    background-image: linear-gradient(to bottom, #11cc00, #0ea300);
+}
+.btn-primary:hover,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled]{
+	background-color:#04c;background-color:#0ea300
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	border-color: rgba(17, 204, 0, 0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(17, 204, 0, 0.6)
+}
+/* Compare */
+.higher{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: 0 0;
+	width: 20px;
+	height: 25px;
+}
+.lower{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: -20px 0;
+	width: 20px;
+	height: 25px;
+}
+.even{
+	background: url('../img/arrows_green_red.png') no-repeat;
+	background-position: -40px 0;
+	width: 20px;
+	height: 25px;
+}

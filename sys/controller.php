@@ -120,6 +120,21 @@ Class Controller extends Template {
 			'data' => $data
 		));
 	}
+	
+	/**
+	 * Create user stats image using GD
+	 * @param string $username
+	 * @return user data (image will be created in front-end)
+	 */
+	public function image( $user )
+	{
+		$data = $this->db->query('SELECT * FROM `' . config('db_table') . '` WHERE `username` = "' . $user .'" LIMIT 1', $this->model_name, TRUE);
+		
+		$this->load('image', array(
+			'data' => $data
+		));
+	}
+
 
 	/**
 	 * Validate skills name and return the

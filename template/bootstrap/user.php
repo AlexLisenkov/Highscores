@@ -1,5 +1,5 @@
 <?php if ($data): ?>
-<h1><?php echo ucfirst($user); ?> <a target="blank" style="font-size: 12pt;" href="../image/<?=$user?>">[image]</a></h1>
+<h1><?php echo ucfirst($user); ?> <a target="blank" style="font-size: 12pt;" href="<?php echo base_url("image/$user")?>">[image]</a></h1>
 <table class="table table-striped">
 
 	<tr>
